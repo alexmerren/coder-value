@@ -14,7 +14,7 @@ GITHUB_TOKEN = "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"
 
 MAX_REPOS_PER_PAGE = 100
 AMOUNT_OF_DAYS_AGO = 365 / 4 
-ACCEPTED_FILETYPES = (".go", ".py", "js")
+ACCEPTED_FILETYPES = (".go", ".py", ".js", ".cpp", ".c", ".html")
 REJECTED_DIRECTORIES = ("vendor/", "mocks/")
 
 def request_with_auth(url):

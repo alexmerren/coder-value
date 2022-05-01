@@ -17,4 +17,9 @@ def create_app():
     @app.errorhandler(404)
     def resourceNotFound(e):
         return render_template("404.html"), 404
+
+    @app.errorhandler(500)
+    def internalServerError(e):
+        return render_template("500.html"), 500 
     return app
+
