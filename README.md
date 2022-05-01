@@ -19,7 +19,7 @@ deactive
 
 To run the application, do the following:
 ```bash
-export FLASK_APP=app
+export FLASK_APP=app.app
 Flask run
 ```
 
