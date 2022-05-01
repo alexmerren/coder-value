@@ -20,5 +20,12 @@ deactive
 To run the application, do the following:
 ```bash
 export FLASK_APP=app
-flask run
+Flask run
+```
+
+## Testing/Profiling
+
+To profile the application (for testing purposes):
+```bash
+env/bin/python -m cProfile app/github/test.py > testOutput.txt
 ```
