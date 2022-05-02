@@ -15,7 +15,7 @@ GITHUB_USERNAME = "alexmerren"
 GITHUB_TOKEN = "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"
 
 MAX_REPOS_PER_PAGE = 100
-AMOUNT_OF_DAYS_AGO = 365 / 4 
+AMOUNT_OF_DAYS_AGO = 365 / 1 
 ACCEPTED_FILETYPES = (".go", ".py", ".js", ".cpp", ".c", ".html")
 REJECTED_DIRECTORIES = ("vendor", "mocks")
 
@@ -26,7 +26,7 @@ def request_with_auth(url):
 def get_year_of_repos(username):
     """ Go through the repos that have the last pushed changes at least a year ago """
     names_of_repos = []
-    repos_response = request_with_auth(f"http://api.github.com/users/{username}/repos?per_page={MAX_REPOS_PER_PAGE}").json()
+    repos_response = request_with_auth(f"http://api.github.com/users/{username}/repos?per_page={MAX_REPOS_PER_PAGE}&sort=pushed").json()
     for repo in repos_response:
         date = datetime.strptime(repo["pushed_at"], "%Y-%m-%dT%H:%M:%SZ")
         if datetime.now() - timedelta(days=AMOUNT_OF_DAYS_AGO) < date:
