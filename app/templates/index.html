@@ -4,17 +4,19 @@
 
 <!-- Inputs for the github api -->
 <div class="input-group">
-    <div class="input-group mx-auto" style="width: 80%;">
+    <form action="/" method="POST" class="input-group mx-auto" style="width: 80%;" >
         <span class="input-group-text" id="basic-addon1">GitHub Username</span>
-        <input type="text" class="form-control input-sm" style="margin-left:-1px" />
-        <span class="input-group-text" id="basic-addon1">Salary</span>
-        <input type="text" class="form-control input-sm" style="margin-left:-2px" />
+        <input type="text" name="username" class="form-control input-sm" style="margin-left:-1px" value="{{ request.form['username'] }}"/>
         <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
+    </form>
 </div>
 
 <!-- This is the point where the results from the github api with highlighted lines are-->
-<div>
-</div>
+{% if response != None %}
+    <div class="mx-auto py-md-3" style="width:80%;">
+        <p>From <code>{{response['filename']}}</code>:</p>
+        <pre><code class="language-{{response['language']}} line-numbers">{{response['content']}}</code></pre>
+    </div>
+{% endif %}
 
 {% endblock %}
