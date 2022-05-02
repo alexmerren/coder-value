@@ -16,16 +16,8 @@
 <!-- This is the point where the results from the github api with highlighted lines are-->
 {% if response != None %}
     <div class="mx-auto py-md-3" style="width:80%;">
-        {% for key, value in response.items() %}
-            <p>From <code>{{key}}</code>:</p>
-            <pre style=" 
-                background-color: #242424; 
-                color: white; 
-                padding: 20px; 
-                white-space:pre;
-                border-radius: 5px;
-            ">{{value}}</pre>
-        {% endfor %}
+        <p>From <code>{{response['filename']}}</code>:</p>
+        <pre><code class="language-{{response['language']}} line-numbers">{{response['content']}}</code></pre>
     </div>
 {% endif %}
 

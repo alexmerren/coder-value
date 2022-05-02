@@ -3,6 +3,8 @@ import requests
 import json
 import base64
 import cProfile
+import re
+import os
 
 from requests.auth import HTTPBasicAuth
 from random import randint
@@ -15,7 +17,7 @@ GITHUB_TOKEN = "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"
 MAX_REPOS_PER_PAGE = 100
 AMOUNT_OF_DAYS_AGO = 365 / 4 
 ACCEPTED_FILETYPES = (".go", ".py", ".js", ".cpp", ".c", ".html")
-REJECTED_DIRECTORIES = ("vendor/", "mocks/")
+REJECTED_DIRECTORIES = ("vendor", "mocks")
 
 def request_with_auth(url):
     """ Wraps HTTP Request with GitHub authentication """
@@ -46,6 +48,9 @@ def pick_semi_random_filepath(repo):
         if file["path"].endswith(ACCEPTED_FILETYPES) and not file["path"].startswith(REJECTED_DIRECTORIES):
             valid_files.append(file["path"])
 
+    if len(valid_files) == 0:
+        return None
+
     random_number = randint(0, len(valid_files)-1)
     return valid_files[random_number] 
 
@@ -69,8 +74,12 @@ def get_single_file_of_repo(username):
 
     # Pick a random file within that file tree, and get the filepath for that file. 
     random_file_path = pick_semi_random_filepath(random_repo_contents)
+    if random_file_path == None:
+        return None
 
     # Get the contents for the random filepath that was chosen.
     file_contents = get_contents_of_file(random_repo_name, random_file_path)
 
-    return {f"{random_repo_name}/{random_file_path}":file_contents}
+    return {"filename":f"{random_repo_name}/{random_file_path}",
+            "language":os.path.splitext(random_file_path)[1][1:],
+            "content":file_contents}
