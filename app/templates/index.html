@@ -7,6 +7,8 @@
     <form action="/" method="POST" class="input-group mx-auto" style="width: 80%;" >
         <span class="input-group-text" id="basic-addon1">GitHub Username</span>
         <input type="text" name="username" class="form-control input-sm" style="margin-left:-1px" value="{{ request.form['username'] }}"/>
+        <span class="input-group-text" id="basic-addon1">Salary</span>
+        <input type="text" name="salary" class="form-control input-sm" style="margin-left:-1px" value="{{ request.form['salary'] }}"/>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
@@ -16,7 +18,7 @@
     <div class="mx-auto py-md-3" style="width:80%;">
         <p>
             From <code>{{file_response['filename']}}</code>
-            - Is this file worth <b>£{{loc_response['totalLines']}}?</b>
+            - Is this file worth <b>£{{file_value}}?</b>
         </p>
         <pre><code class="language-{{file_response['language']}} line-numbers"> {{file_response['content']}}</code></pre>
     </div>
