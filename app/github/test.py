@@ -6,4 +6,4 @@ def main():
     cProfile.runctx("get_single_file_of_repo(username='alexmerren')", globals(), locals(), filename=None)
 
 if __name__ == "__main__":
-        main()
+    main()

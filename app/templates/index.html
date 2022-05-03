@@ -12,10 +12,13 @@
 </div>
 
 <!-- This is the point where the results from the github api with highlighted lines are-->
-{% if response != None %}
+{% if file_response != None %}
     <div class="mx-auto py-md-3" style="width:80%;">
-        <p>From <code>{{response['filename']}}</code>:</p>
-        <pre><code class="language-{{response['language']}} line-numbers">{{response['content']}}</code></pre>
+        <p>
+            From <code>{{file_response['filename']}}</code>
+            - Is this file worth <b>£{{loc_response['totalLines']}}?</b>
+        </p>
+        <pre><code class="language-{{file_response['language']}} line-numbers"> {{file_response['content']}}</code></pre>
     </div>
 {% endif %}
 
