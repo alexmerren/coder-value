@@ -7,15 +7,20 @@
     <form action="/" method="POST" class="input-group mx-auto" style="width: 80%;" >
         <span class="input-group-text" id="basic-addon1">GitHub Username</span>
         <input type="text" name="username" class="form-control input-sm" style="margin-left:-1px" value="{{ request.form['username'] }}"/>
+        <span class="input-group-text" id="basic-addon1">Salary</span>
+        <input type="text" name="salary" class="form-control input-sm" style="margin-left:-1px" value="{{ request.form['salary'] }}"/>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
 
 <!-- This is the point where the results from the github api with highlighted lines are-->
-{% if response != None %}
+{% if file_response != None %}
     <div class="mx-auto py-md-3" style="width:80%;">
-        <p>From <code>{{response['filename']}}</code>:</p>
-        <pre><code class="language-{{response['language']}} line-numbers">{{response['content']}}</code></pre>
+        <p>
+            From <code>{{file_response['filename']}}</code>
+            - Is this file worth <b>£{{file_value}}?</b>
+        </p>
+        <pre><code class="language-{{file_response['language']}} line-numbers"> {{file_response['content']}}</code></pre>
     </div>
 {% endif %}
 
