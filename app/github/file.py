@@ -6,7 +6,7 @@ from random import randint
 from .api import request_with_auth, get_repos_from_url, get_repos_in_time_range 
 
 ACCEPTED_FILETYPES = (".go", ".py", ".js", ".cpp", ".c", ".html", ".java", ".ts", ".rb", ".php")
-REJECTED_DIRECTORIES = ("vendor", "mocks")
+REJECTED_DIRECTORIES = ("vendor", "mocks", "venv")
 
 def get_random_repo_from_list(repo_list):
     random_number = randint(0, len(repo_list)-1)
@@ -17,9 +17,12 @@ def get_contents_of_repo(repo_name):
 
 def pick_random_filepath(repo):
     valid_files = []
-    for file in repo["tree"]:
-        if file["path"].endswith(ACCEPTED_FILETYPES) and not file["path"].startswith(REJECTED_DIRECTORIES):
-            valid_files.append(file["path"])
+    if "tree" not in repo:
+        return None
+
+    for file_info in repo["tree"]:
+        if file_info["path"].endswith(ACCEPTED_FILETYPES) and not file_info["path"].startswith(REJECTED_DIRECTORIES):
+            valid_files.append(file_info["path"])
 
     if len(valid_files) == 0:
         return None
