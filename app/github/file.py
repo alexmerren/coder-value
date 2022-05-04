@@ -5,8 +5,8 @@ import os
 from random import randint
 from .api import request_with_auth, get_repos_from_url, get_repos_in_time_range 
 
-ACCEPTED_FILETYPES = (".go", ".py", ".js", ".cpp", ".c", ".html", ".java", ".ts", ".rb", ".php")
-REJECTED_DIRECTORIES = ("vendor", "mocks", "venv")
+ACCEPTED_FILETYPES = (".py", ".js", ".java", ".go", ".cpp", ".rb", ".php", ".cs", ".c", ".sh")
+REJECTED_DIRECTORIES = ("vendor", "mocks", "venv", "node_modules")
 
 def get_random_repo_from_list(repo_list):
     random_number = randint(0, len(repo_list)-1)
@@ -16,10 +16,10 @@ def get_contents_of_repo(repo_name):
     return request_with_auth(f"http://api.github.com/repos/{repo_name}/git/trees/main?recursive=1").json()
 
 def pick_random_filepath(repo):
-    valid_files = []
     if "tree" not in repo:
         return None
 
+    valid_files = []
     for file_info in repo["tree"]:
         if file_info["path"].endswith(ACCEPTED_FILETYPES) and not file_info["path"].startswith(REJECTED_DIRECTORIES):
             valid_files.append(file_info["path"])
@@ -31,8 +31,7 @@ def pick_random_filepath(repo):
     return valid_files[random_number] 
 
 def get_contents_of_file(repo_name, path):
-    file_content = request_with_auth(f"http://raw.githubusercontent.com/{repo_name}/main/{path}").text
-    return file_content
+    return request_with_auth(f"http://raw.githubusercontent.com/{repo_name}/main/{path}").text
 
 def get_single_file_of_repo(username):
     repo_name_list = get_repos_in_time_range(username)
