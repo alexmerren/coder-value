@@ -1,6 +1,7 @@
 from app.github.file import get_single_file_of_repo 
 from app.github.loc import get_account_loc 
 from flask import Blueprint, render_template, request
+import requests_cache
 
 basic = Blueprint('basic', __name__, template_folder="templates")
 
