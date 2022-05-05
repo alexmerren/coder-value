@@ -1,6 +1,8 @@
 PYTHON := python3
 DOCKER := docker
 
+GITHUB_CONFIG := ./github_config
+
 ## help: Print this message
 .PHONY: help
 help:
@@ -9,6 +11,7 @@ help:
 ## run: Run the app locally 
 .PHONY: run
 run:
+	source $(GITHUB_CONFIG)
 	$(PYTHON) main.py 
 
 ## docker-build: Build the docker image 
