@@ -5,7 +5,7 @@ import os
 from random import randint
 from .api import request_with_auth, get_repos_from_url, get_repos_in_time_range 
 
-ACCEPTED_FILETYPES = (".py", ".js", ".java", ".go", ".cpp", ".rb", ".php", ".cs", ".c", ".sh")
+ACCEPTED_FILETYPES = (".py", ".js", ".java", ".go", ".cpp", ".rb", ".php", ".cs", ".c", ".sh", ".css", ".tsx", ".ts", ".html")
 REJECTED_DIRECTORIES = ("vendor", "mocks", "venv", "node_modules")
 
 def get_random_repo_from_list(repo_list):
