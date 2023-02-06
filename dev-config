@@ -1,0 +1,5 @@
+#!/bin/bash
+export CV_GITHUB_USERNAME="alexmerren"
+export CV_GITHUB_TOKEN="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"
+export CV_PORT="5000"
+export CV_HOST="localhost"

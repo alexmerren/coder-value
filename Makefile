@@ -1,7 +1,9 @@
 PYTHON := python3
 DOCKER := docker
 
-GITHUB_CONFIG := ./github_config
+CONFIG := $(CURDIR)/dev-config
+
+DOCKER_IMAGE_NAME := coder-value
 
 ## help: Print this message
 .PHONY: help
@@ -11,15 +13,21 @@ help:
 ## run: Run the app locally 
 .PHONY: run
 run:
-	source $(GITHUB_CONFIG)
+	$(CONFIG)
 	$(PYTHON) main.py 
 
 ## docker-build: Build the docker image 
 .PHONY: docker-build
 docker-build:
-	@echo "Not Implemented Yet"
+	$(DOCKER) build -t $(DOCKER_IMAGE_NAME) .
 
 ## docker-run: Run the built docker image
 .PHONY: docker-run
 docker-run:
-	@echo "Not Implemented Yet..."
+	$(DOCKER) run \
+		--rm \
+		-e FLASK_APP=main.py \
+		-e CV_HOST=0.0.0.0 \
+		-e CV_PORT=5000 \
+		-p 5000:5000 \
+		$(DOCKER_IMAGE_NAME)

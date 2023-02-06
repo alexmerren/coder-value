@@ -10,8 +10,8 @@ from flask import current_app
 
 s = requests_cache.CachedSession('github_cache')
 
-GITHUB_USERNAME = environ.get("GITHUB_USERNAME")
-GITHUB_TOKEN = environ.get("GITHUB_TOKEN")
+GITHUB_USERNAME = environ.get("CV_GITHUB_USERNAME")
+GITHUB_TOKEN = environ.get("CV_GITHUB_TOKEN")
 
 # Control size of response from get_year_of_repos()
 MAX_REPOS_PER_PAGE = 100
